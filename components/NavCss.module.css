@@ -1,0 +1,21 @@
+.link {
+    text-decoration: none;
+    color: white;
+    width: 100%;
+  }
+  
+  .active {
+    color: red;
+  }
+
+  .otherLink {
+    text-decoration: none; 
+    color: white; 
+    margin-right: 20px;
+  }
+  .otherActive {
+    text-decoration: none; 
+    color: rgb(255, 32, 32);
+    margin-right: 20px;
+    font-weight: 600;
+  }
