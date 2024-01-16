@@ -12,22 +12,15 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Navigation } from "swiper/modules";
-
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
-
 import { FreeMode, Pagination } from "swiper/modules";
 
 import CarocelComponent from "./CarocelComponent";
 
-import { HeroSectionContext } from "./Context/HeroContext";
 
-const Carosel = () => {
 
-    const { albums, setAlbums } = useContext(HeroSectionContext);
+const Carosel = ({albums}) => {
+
+    
 
 
   return (
@@ -45,7 +38,8 @@ const Carosel = () => {
       >
         {albums.map((album) => (
           <SwiperSlide key={album.id}>
-            <CarocelComponent />
+            <CarocelComponent img={album.image} />
+            {console.log(album._id)}
           </SwiperSlide>
         ))}
       </Swiper>
