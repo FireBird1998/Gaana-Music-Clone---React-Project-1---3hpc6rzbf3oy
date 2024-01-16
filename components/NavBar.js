@@ -226,6 +226,8 @@ export default function NavBar({content}) {
                 Log in/Sign Up
               </Link>
 
+              
+
               <Button variant="contained" onClick={goToGannaPlus} sx={{
                 color: 'black',
                 borderRadius: '50px',
