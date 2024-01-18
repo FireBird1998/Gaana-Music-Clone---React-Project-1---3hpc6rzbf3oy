@@ -1,28 +1,36 @@
-import React from 'react'
+import React from "react";
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 // import required modules
-import { EffectCoverflow, Pagination } from 'swiper/modules';
-import { Box } from '@mui/material';
-import CarocelComponent from './CarocelComponent';
+import {
+  EffectCoverflow,
+  Pagination,
+  Autoplay,
+  Navigation,
+} from "swiper/modules";
+import { Box } from "@mui/material";
+import HeroCaroselCard from "./HeroCaroselCard";
 
-const HeroCarosel = ({albums}) => {
+const HeroCarosel = ({ albums }) => {
   return (
-    <Box sx={{
+    <Box
+      sx={{
         height: 300,
-        
-    }}>
+        width: "100%",
+      }}
+    >
       <Swiper
-        style={{ height: '100%' }} 
-        effect={'coverflow'}
-        grabCursor={true}
+        style={{ height: "100%" }}
+        effect={"coverflow"}
         centeredSlides={true}
+        loop={true}
         slidesPerView={3}
         coverflowEffect={{
           rotate: 50,
@@ -31,40 +39,24 @@ const HeroCarosel = ({albums}) => {
           modifier: 1,
           slideShadows: true,
         }}
-        pagination={true}
-        modules={[EffectCoverflow, Pagination]}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        navigation={true}
+        modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
         className="mySwiper"
       >
-        <SwiperSlide>
-          <CarocelComponent img={albums[0].thumbnail}/>
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-6.jpg" style={{ width: '100%', height: '100%', objectFit: 'cover' }}/>
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-7.jpg" style={{ width: '100%', height: '100%', objectFit: 'cover' }}/>
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-8.jpg" style={{ width: '100%', height: '100%', objectFit: 'cover' }}/>
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-9.jpg" style={{ width: '100%', height: '100%', objectFit: 'cover' }}/>
-        </SwiperSlide>
+        {albums.map((album) => {
+          return (
+            <SwiperSlide key={album._id}>
+              <HeroCaroselCard img={album.image} title={album.title} id={album._id} />
+            </SwiperSlide>
+          );
+        })} 
       </Swiper>
     </Box>
-  )
-}
+  );
+};
 
-export default HeroCarosel
+export default HeroCarosel;

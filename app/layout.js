@@ -59,7 +59,6 @@ export default function RootLayout({ children }) {
         <ThemeProvider theme={theme}>
           <AppRouterCacheProvider options={{ enableCssLayer: true }}>
             <NavBar themeToggle={toggleTheme} content={children}  />
-            
           </AppRouterCacheProvider>
         </ThemeProvider>
       </body>

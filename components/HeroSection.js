@@ -32,8 +32,7 @@ const HeroSection = () => {
     >
       <Box
         sx={{
-          width: "90vw",
-          overflow: "hidden",
+          maxWidth: "80vw",
           display: "block",
         }}
       >
