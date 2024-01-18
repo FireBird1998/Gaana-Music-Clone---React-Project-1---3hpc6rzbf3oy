@@ -1,7 +1,7 @@
 "use client"
 
 
-import { Box } from "@mui/material"
+import { Box, Typography } from "@mui/material"
 import HeroSection from "@/components/HeroSection"
 
 import { useRouter } from "next/navigation"
@@ -15,11 +15,10 @@ const Home = () => {
   return (
     <Box sx={{
       display: 'flex',
+      flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      height: '30vh',
-      backgroundColor: '',
-    }}>
+    }}>  
       <HeroSectionProvider>
         <HeroSection/>
       </HeroSectionProvider>

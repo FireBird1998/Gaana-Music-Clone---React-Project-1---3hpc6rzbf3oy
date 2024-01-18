@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import Carosel from "./Carosel";
 import { Box } from "@mui/material";
 
 import { HeroSectionContext } from "./Context/HeroContext";
 
 import { fetchWithProjectId } from "@/utils";
+import HeroCarosel from "./HeroCarosel";
 
 const HeroSection = () => {
   const { albums, setAlbums } = useContext(HeroSectionContext);
@@ -23,19 +23,24 @@ const HeroSection = () => {
     fetchAlbum();
   }, []);
 
-  console.log(albums);
 
   return (
     <Box
       sx={{
-        width: "90vw",
-        overflow: "hidden",
+        display: "flex",
       }}
     >
-      {loading ? 'Loading...' : <Carosel albums={albums} />}
+      <Box
+        sx={{
+          width: "90vw",
+          overflow: "hidden",
+          display: "block",
+        }}
+      >
+        {loading ? "Loading..." : <HeroCarosel albums={albums}/>}
+      </Box>
     </Box>
   );
 };
-
 
 export default HeroSection;

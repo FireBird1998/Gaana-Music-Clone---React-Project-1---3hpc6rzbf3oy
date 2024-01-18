@@ -39,7 +39,6 @@ const Carosel = ({albums}) => {
         {albums.map((album) => (
           <SwiperSlide key={album.id}>
             <CarocelComponent img={album.image} />
-            {console.log(album._id)}
           </SwiperSlide>
         ))}
       </Swiper>
