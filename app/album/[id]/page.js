@@ -12,11 +12,12 @@ import {
   Button,
   CircularProgress,
 } from "@mui/material";
-import TrackDisplay from "@/components/TrackDisplay";
+
+import TrackDisplay2 from "@/components/TrackDisplay2";
 
 const page = () => {
   let { id } = useParams();
-  const [tracks, setTracks] = useState([]);
+  const [album, setAlbum] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -24,20 +25,22 @@ const page = () => {
       const data = await fetchWithProjectId(
         `https://academics.newtonschool.co/api/v1/music/album?filter={"_id": "${id}"}`
       );
-      setTracks(data.data);
+      setAlbum(data.data);
       setLoading(false);
+      console.log(data.data); 
     };
     fetchalbum();
   }, []);
 
+  
   if (loading) {
     return <CircularProgress />;
   }
 
   return (
     <>
-      {HeroCard(tracks[0])}
-      <TrackDisplay tracks={tracks[0].songs} />
+      {HeroCard(album[0])}
+      <TrackDisplay2 tracks={album[0].songs} artistArray={album[0].artists}/>
     </>
   );
 };

@@ -28,7 +28,7 @@ const TrackDisplay = ({tracks}) => {
         </TableHead>
         <TableBody>
           {tracks.map((track) => {
-            console.log(track._id, track.thumbnail, track.artist[0].name)
+            // console.log(track._id, track.thumbnail, track.artist[0].name)
             return (
             <TableRow
               key={track._id}
