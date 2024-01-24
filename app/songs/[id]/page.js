@@ -17,6 +17,9 @@ import Button from '@mui/material/Button';
 import { useParams } from "next/navigation";
 import TrackDisplay2 from "@/components/TrackDisplay2";
 
+import { PlayerList } from "@/components/Context/PlayerList"; 
+import HeroCardS from "@/components/HeroCardS";
+
 const page = () => {
     const [tracks, setTracks] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -43,7 +46,7 @@ const page = () => {
   
     return (
       <>
-        {HeroCard(tracks)}
+        <HeroCardS tracks={tracks}/>
         <TrackDisplay tracks={tracks}  />
          
       </>
@@ -54,6 +57,13 @@ export default page
 
 const HeroCard = (tracks) => {
     // Check if tracks array is not empty
+
+    const { addToLast, clearPlaylist  } = React.useContext(PlayerList);
+
+    const handlePlayAll = () => {
+      clearPlaylist();
+      tracks.forEach(track => addToLast(track));
+    }
 
     if (tracks.length > 0) {
       return (
@@ -92,7 +102,7 @@ const HeroCard = (tracks) => {
               <br />
               20 Tracks
             </Typography>
-            <Button variant="contained" sx={{ borderRadius: '20px',  }} >Play</Button>
+            <Button variant="contained" sx={{ borderRadius: '20px',  }} onClick={() => {handlePlayAll}} >Play All</Button>
           </div>
         </Box>
       );

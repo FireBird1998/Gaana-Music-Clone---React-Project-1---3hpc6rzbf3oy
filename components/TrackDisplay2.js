@@ -13,7 +13,16 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 
+import { PlayerList } from "./Context/PlayerList";
+
 const TrackDisplay2 = ({ tracks, artistArray }) => {
+  const { addToFront, clearPlaylist, addToLast } = React.useContext(PlayerList);
+
+  const handleAddToFront = (track) => {
+    console.log(track);
+    addToFront(track);
+  };
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -36,8 +45,12 @@ const TrackDisplay2 = ({ tracks, artistArray }) => {
             return (
               <TableRow
                 key={track._id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                onClick={() => {}}
+                sx={{
+                  "&:last-child td, &:last-child th": { border: 0 },
+                }}
+                onClick={() => {
+                  handleAddToFront(track);
+                }}
               >
                 <TableCell
                   component="th"
@@ -46,12 +59,19 @@ const TrackDisplay2 = ({ tracks, artistArray }) => {
                     display: "flex",
                     alignItems: "center",
                     gap: "10px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    handleAddToFront(track);
                   }}
                 >
-                  {songCard(track.thumbnail, track.title)}
+                  {songCard(track.thumbnail, track.title, track)}
                   {track.title}
                 </TableCell>
-                <TableCell align="left">{trackArtists.map(artist => artist.name).join(', ')}</TableCell>
+
+                <TableCell align="left">
+                  {trackArtists.map((artist) => artist.name).join(", ")}
+                </TableCell>
                 <TableCell align="center">no data</TableCell>
               </TableRow>
             );
@@ -62,12 +82,13 @@ const TrackDisplay2 = ({ tracks, artistArray }) => {
   );
 };
 
-const songCard = (img, title) => (
+const songCard = (img, title, track) => (
   <Card
     sx={{
       width: 48,
       height: 48,
     }}
+    onClick={() => handleAddToFront(track)}
   >
     <CardActionArea
       sx={{
