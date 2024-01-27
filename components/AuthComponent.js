@@ -58,7 +58,7 @@ const AuthComponent = () => {
       >
         <Box sx={style}>
           <Switch checked={toggle} onChange={handleToggle} color="secondary" />
-          {toggle ? <Register /> : <SignIn toggle={handleToggle} closeModal={handleClose} />}
+          {toggle ? <Register toggle={handleToggle} /> : <SignIn toggle={handleToggle} closeModal={handleClose} />}
         </Box>
       </Modal>
     </div>
