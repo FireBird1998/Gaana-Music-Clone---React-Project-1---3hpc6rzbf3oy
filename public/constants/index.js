@@ -17,7 +17,7 @@ export const primaryNavLinks = [
     {
       id: "my-music",
       title: "My Music",
-      path: "/my-music",
+      path: "/myMusic",
     },
     {
       id: "indias-music",

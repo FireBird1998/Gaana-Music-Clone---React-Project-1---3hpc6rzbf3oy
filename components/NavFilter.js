@@ -124,7 +124,7 @@ const NavFilter = () => {
         <StyledLink underline="hover" color="inherit" href="/">
           Podcast
         </StyledLink>
-        <StyledLink underline="hover" color="inherit" href="/">
+        <StyledLink underline="hover" color="inherit" href="/myMusic">
           My Music
         </StyledLink>
       </Breadcrumbs>

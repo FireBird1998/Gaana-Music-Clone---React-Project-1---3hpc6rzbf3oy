@@ -245,6 +245,7 @@ export default function NavBar({ content, themeToggle }) {
                     height={26}
                     width={100}
                   />
+                  
                 </Link>
                 <Search>
                   <SearchIconWrapper>

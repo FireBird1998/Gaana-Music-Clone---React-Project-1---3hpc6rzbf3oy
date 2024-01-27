@@ -8,6 +8,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import NavBar from "@/components/NavBar";
 import { PlayerListProvider } from "@/components/Context/PlayerList";
 import { AuthProvider } from "@/components/Context/AuthContex";
+import { FavouriteSongsProvider } from "@/components/Context/FavouriteSongsContext";
 
 import { Toaster } from "react-hot-toast";
 
@@ -58,10 +59,12 @@ export default function RootLayout({ children }) {
         <ThemeProvider theme={theme}>
           <AppRouterCacheProvider options={{ enableCssLayer: true }}>
             <AuthProvider>
-              <PlayerListProvider>
-                <NavBar themeToggle={toggleTheme} content={children} />
-                <Toaster position="top-right" reverseOrder={false}/>
-              </PlayerListProvider>
+              <FavouriteSongsProvider>
+                <PlayerListProvider>
+                  <NavBar themeToggle={toggleTheme} content={children} />
+                  <Toaster position="top-right" reverseOrder={false} />
+                </PlayerListProvider>
+              </FavouriteSongsProvider>
             </AuthProvider>
           </AppRouterCacheProvider>
         </ThemeProvider>
