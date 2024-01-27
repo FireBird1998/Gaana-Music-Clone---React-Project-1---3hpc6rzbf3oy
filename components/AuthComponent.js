@@ -13,6 +13,7 @@ import { AuthContext } from "./Context/AuthContex";
 
 import SignIn from "./SignIn";
 import Register from "./Register";
+import UserInfo from "./UserInfo";
 
 const AuthComponent = () => {
   const [open, setOpen] = React.useState(false);
@@ -41,7 +42,8 @@ const AuthComponent = () => {
     <div>
       {authContex.isUserAuthenticated() ? (
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-           Hi, {authContex.authState.userInfo.name}
+           {/* Hi, {authContex.authState.userInfo.name} */}
+           <UserInfo name={authContex.authState.userInfo.name} logout={authContex.logout}/>
         </Typography>
       ) : (
         <Button onClick={handleOpen} sx={{color: theme.palette.text.primary}}>

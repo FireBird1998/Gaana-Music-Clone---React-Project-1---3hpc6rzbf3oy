@@ -43,8 +43,13 @@ export default function SignIn({ toggle, closeModal }) {
     // });
   };
 
+  /**
+   * Logs in a user with the provided email and password.
+   * @param {string} email - The user's email.
+   * @param {string} password - The user's password.
+   * @returns {Promise<Object>} - A promise that resolves to the JSON response from the login API.
+   */
   async function loginUser(email, password) {
-    
     const url = "https://academics.newtonschool.co/api/v1/user/login";
     const data = {
       email: email,
@@ -56,7 +61,7 @@ export default function SignIn({ toggle, closeModal }) {
       const response = await fetch(url, {
         method: "POST",
         headers: {
-          "projectId" : "f104bi07c49",
+          projectId: "f104bi07c49",
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
@@ -66,19 +71,17 @@ export default function SignIn({ toggle, closeModal }) {
         const jsonResponse = await response.json();
         toast.error(jsonResponse.message); // Show the error message in a toast
         throw new Error(`HTTP error! status: ${response.status}`);
-
       } else {
         const jsonResponse = await response.json();
 
         console.log(jsonResponse);
         toast.success("Login Successful");
         setAuthState(jsonResponse);
-        closeModal() // set the auth state
+        closeModal(); // set the auth state
         return jsonResponse;
       }
     } catch (error) {
       console.error("There was an error with the fetch operation: ", error);
-      
     }
   }
 
