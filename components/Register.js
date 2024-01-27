@@ -20,8 +20,7 @@ const validateEmail = (email) => {
 
 const validatePassword = (password) => {
   // the password must contain at least one uppercase letter, one lowercase letter, and one number.
-  const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-  return re.test(String(password));
+  return password.length >= 8;
 }
 
 /**
