@@ -1,5 +1,3 @@
-"use client"
-
 import React, { useRef, useState, useEffect, useContext } from "react";
 
 // Import Swiper React components
@@ -14,15 +12,7 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { FreeMode, Pagination, Autoplay } from "swiper/modules";
 
-import CarocelComponent from "./CarocelComponent";
-
-
-
-const Carosel = ({albums}) => {
-
-    
-
-
+const SongCarocel = ({songs}) => {
   return (
     <>
       <Swiper
@@ -66,19 +56,10 @@ const Carosel = ({albums}) => {
 
         }}
       >
-        {albums.map((album) => (
-          <SwiperSlide key={album._id} style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
 
-          }}>
-            <CarocelComponent img={album.image} id={album._id} />
-          </SwiperSlide>
-        ))}
       </Swiper>
     </>
-  );
-};
+  )
+}
 
-export default Carosel;
+export default SongCarocel

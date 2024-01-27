@@ -7,21 +7,22 @@ import { CardActionArea } from "@mui/material";
 
 import { useRouter } from "next/navigation";
 
-const HeroCaroselCard = ({img, title, id}) => {
-    const router = useRouter();
+const HeroCaroselCard = ({ img, title, id }) => {
+  const router = useRouter();
 
   const handleClick = () => {
     router.push(`/album/${id}`);
   };
   return (
-    <Card sx={{ 
+    <Card
+      sx={{
         height: "100%",
         width: "100%",
-      }}>
+      }}
+    >
       <CardActionArea onClick={handleClick}>
         <CardMedia
           component="img"
-          
           image={img}
           alt={title}
           sx={{
@@ -29,7 +30,7 @@ const HeroCaroselCard = ({img, title, id}) => {
             height: "100%",
             width: "100%",
           }}
-        /> 
+        />
       </CardActionArea>
     </Card>
   );

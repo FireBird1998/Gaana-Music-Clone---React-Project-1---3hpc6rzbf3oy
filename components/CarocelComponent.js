@@ -9,13 +9,21 @@ import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 
 import { FreeMode, Pagination } from "swiper/modules";
 
-const CarocelComponent = ({ img }) => {
+import { useRouter } from "next/navigation";
+
+const CarocelComponent = ({ img, id }) => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/album/${id}`);
+  };
+
   return (
     <Card
       sx={{
         maxWidth: 245,
-        height: 200,
-        width: 245,
+        maxHeight: 245,
+        backgroundColor: "#fff",
       }}
     >
       <CardActionArea
@@ -25,13 +33,17 @@ const CarocelComponent = ({ img }) => {
             visibility: "visible",
           },
         }}
+        onClick={handleClick}
       >
         <CardMedia
           component="img"
           height="200"
           image={img}
           alt="green iguana"
-          sx={{}}
+          sx={{
+            backgroundPosition: "center",
+            objectFit: "cover",
+          }}
         />
         <CardContent
           className="content"

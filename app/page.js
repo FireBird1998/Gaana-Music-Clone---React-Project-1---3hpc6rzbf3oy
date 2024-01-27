@@ -7,6 +7,7 @@ import HeroSection from "@/components/HeroSection"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import { HeroSectionProvider } from '@/components/Context/HeroContext';
+import HomeBody from "@/components/Home/HomeBody"
 
 
 
@@ -18,10 +19,16 @@ const Home = () => {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
+      
+
     }}>  
       <HeroSectionProvider>
         <HeroSection/>
       </HeroSectionProvider>
+      <HomeBody  />
+      
+
+
       
 
     </Box>

@@ -31,7 +31,7 @@ const HeroCarosel = ({ albums }) => {
         effect={"coverflow"}
         centeredSlides={true}
         loop={true}
-        slidesPerView={3}
+        slidesPerView={1}
         coverflowEffect={{
           rotate: 50,
           stretch: 0,
@@ -39,6 +39,7 @@ const HeroCarosel = ({ albums }) => {
           modifier: 1,
           slideShadows: true,
         }}
+        speed={1500}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
@@ -46,6 +47,24 @@ const HeroCarosel = ({ albums }) => {
         navigation={true}
         modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
         className="mySwiper"
+        breakpoints={{
+          630: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+            centeredSlides: true,
+
+          },
+          810: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+            centeredSlides: true
+          },
+          1080: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            centeredSlides: true
+          }
+        }}
       >
         {albums.map((album) => {
           return (

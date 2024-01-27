@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "next/navigation";
 import { fetchWithProjectId } from "@/utils";
 
@@ -14,11 +14,19 @@ import {
 } from "@mui/material";
 
 import TrackDisplay2 from "@/components/TrackDisplay2";
+import { PlayerList } from "@/components/Context/PlayerList";
 
 const page = () => {
   let { id } = useParams();
   const [album, setAlbum] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const { addToLast, clearPlaylist } = useContext(PlayerList);
+
+  const handlePlayAll = () => {
+    clearPlaylist();
+    album[0].songs.forEach((track) => addToLast(track));
+  };
 
   useEffect(() => {
     const fetchalbum = async () => {
@@ -27,29 +35,27 @@ const page = () => {
       );
       setAlbum(data.data);
       setLoading(false);
-      console.log(data.data); 
     };
     fetchalbum();
   }, []);
 
-  
   if (loading) {
     return <CircularProgress />;
   }
 
   return (
     <>
-      {HeroCard(album[0])}
-      <TrackDisplay2 tracks={album[0].songs} artistArray={album[0].artists}/>
+      {HeroCard(album, handlePlayAll, clearPlaylist)}
+      <TrackDisplay2 tracks={album[0].songs} artistArray={album[0].artists} />
     </>
   );
 };
 
 export default page;
 
-const HeroCard = (almum) => {
+const HeroCard = (almum, handlePlayAll, clearPlaylist) => {
   // Check if tracks array is not empty
-  if (almum) {
+  if (almum.length > 0) {
     return (
       <Box
         sx={{
@@ -69,25 +75,36 @@ const HeroCard = (almum) => {
             component="img"
             height="345"
             width="345"
-            image={almum.image} // Now it should work
-            alt={almum.title}
+            image={almum[0].image}
+            alt={almum[0].title}
           />
         </Card>
         <div>
           <Typography variant="h2" component="h2">
-            {almum.title}
+            {almum[0].title}
           </Typography>
           <Typography
             variant="body1"
             component="p"
             sx={{ marginBottom: "20px" }}
           >
-            {almum.description}
+            {almum[0].description}
             <br />
-            {almum.songs.length} Tracks
+            {almum[0].songs.length} Tracks
           </Typography>
-          <Button variant="contained" sx={{ borderRadius: "20px" }}>
-            Play
+          <Button
+            variant="contained"
+            sx={{ borderRadius: "20px" }}
+            onClick={handlePlayAll}
+          >
+            Play All
+          </Button>
+          <Button
+            variant="contained"
+            sx={{ borderRadius: "20px", marginLeft: "20px" }}
+            onClick={clearPlaylist}
+          >
+            Clear Playlist
           </Button>
         </div>
       </Box>

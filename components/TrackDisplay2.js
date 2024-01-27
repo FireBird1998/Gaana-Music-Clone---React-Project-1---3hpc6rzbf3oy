@@ -19,7 +19,7 @@ const TrackDisplay2 = ({ tracks, artistArray }) => {
   const { addToFront, clearPlaylist, addToLast } = React.useContext(PlayerList);
 
   const handleAddToFront = (track) => {
-    console.log(track);
+    clearPlaylist();
     addToFront(track);
   };
 
@@ -65,7 +65,7 @@ const TrackDisplay2 = ({ tracks, artistArray }) => {
                     handleAddToFront(track);
                   }}
                 >
-                  {songCard(track.thumbnail, track.title, track)}
+                  {songCard(track.thumbnail, track.title, track, handleAddToFront)}
                   {track.title}
                 </TableCell>
 
@@ -82,7 +82,7 @@ const TrackDisplay2 = ({ tracks, artistArray }) => {
   );
 };
 
-const songCard = (img, title, track) => (
+const songCard = (img, title, track, handleAddToFront) => (
   <Card
     sx={{
       width: 48,

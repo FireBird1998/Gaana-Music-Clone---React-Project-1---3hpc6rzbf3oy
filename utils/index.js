@@ -1,4 +1,5 @@
 
+
 const projectId = 'f104bi07c49'; 
 
 
@@ -17,3 +18,4 @@ export const fetchWithProjectId = async (url, options = {}) => {
     const data = await response.json();
     return data;
 };
+

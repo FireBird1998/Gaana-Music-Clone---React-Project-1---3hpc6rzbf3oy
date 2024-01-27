@@ -108,14 +108,14 @@ const NavFilter = () => {
         <StyledLink underline="hover" color="inherit" href={`/trendingSongs`}>
           Trending Songs
         </StyledLink>
-        <StyledLink underline="hover" color="inherit" href={`/`}>
+        <StyledLink underline="hover" color="inherit" href={`/newSongs`}>
           New Songs
         </StyledLink>
-        <StyledLink underline="hover" color="inherit" href="/">
+        <StyledLink underline="hover" color="inherit" href="/oldSongs">
           Old Songs
         </StyledLink>
         {moodAndGene()}
-        <StyledLink underline="hover" color="inherit" href="/">
+        <StyledLink underline="hover" color="inherit" href="/album">
           Album
         </StyledLink>
         <StyledLink underline="hover" color="inherit" href="/">

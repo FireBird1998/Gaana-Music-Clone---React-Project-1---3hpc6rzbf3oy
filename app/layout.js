@@ -7,6 +7,9 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import NavBar from "@/components/NavBar";
 import { PlayerListProvider } from "@/components/Context/PlayerList";
+import { AuthProvider } from "@/components/Context/AuthContex";
+
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -54,9 +57,12 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <ThemeProvider theme={theme}>
           <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-            <PlayerListProvider>
-              <NavBar themeToggle={toggleTheme} content={children} />
-            </PlayerListProvider>
+            <AuthProvider>
+              <PlayerListProvider>
+                <NavBar themeToggle={toggleTheme} content={children} />
+                <Toaster position="top-right" reverseOrder={false}/>
+              </PlayerListProvider>
+            </AuthProvider>
           </AppRouterCacheProvider>
         </ThemeProvider>
       </body>

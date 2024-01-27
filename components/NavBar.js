@@ -39,6 +39,7 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import Stack from "@mui/material/Stack";
+import AuthComponent from "./AuthComponent";
 
 const drawerWidth = 240;
 
@@ -266,16 +267,8 @@ export default function NavBar({ content, themeToggle }) {
                   marginLeft: "30px",
                 }}
               >
-                {/* <Button variant="contained" href="#contained-buttons" sx={{
-                background: 'linear-gradient(90deg, rgba(255,2,5,1) 20%, rgba(255,105,0,1) 80%)',
-                borderRadius: '50px',
-                fontSize: '12px',
-                width: '100%',
-                mx: '20px',
-              }}>
-                Welcome Offer: 1 Month Trial @ ₹1
-              </Button>    */}
-                <Link
+                
+                {/* <Link
                   href={`/loginRegister`}
                   className={`${
                     pathname === "/loginRegister"
@@ -285,7 +278,9 @@ export default function NavBar({ content, themeToggle }) {
                   style={{ color: theme.palette.text.primary }} // Add this line
                 >
                   Log in/Sign Up
-                </Link>
+                </Link> */}
+
+                <AuthComponent />
 
                 <FormGroup>
                   <FormControlLabel
@@ -303,10 +298,13 @@ export default function NavBar({ content, themeToggle }) {
                   variant="contained"
                   onClick={goToGannaPlus}
                   sx={{
-                    color: "black",
+                    background: 'linear-gradient(90deg, rgba(255,2,5,1) 20%, rgba(255,105,0,1) 80%)',
+                    color: "white",
                     borderRadius: "50px",
-                    fontSize: "12px",
+                    fontSize: "13px",
+                    fontStyle: "bloder",
                     marginRight: "20px",
+
                   }}
                 >
                   Get Gaana Plus
@@ -328,7 +326,14 @@ export default function NavBar({ content, themeToggle }) {
           anchor="left"
           open={open}
         >
-          <DrawerHeader>
+          <DrawerHeader
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <AuthComponent />
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === "ltr" ? (
                 <ChevronLeftIcon />
@@ -386,6 +391,7 @@ export default function NavBar({ content, themeToggle }) {
           bottom: 0,
           left: 0,
           right: 0,
+          zIndex: 999,
         }}
       >
         <Player />

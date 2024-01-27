@@ -10,7 +10,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
-
+import { useTheme } from "@mui/material/styles";
+import toast from 'react-hot-toast';
 
 export default function Register() {
   const handleSubmit = (event) => {
@@ -20,8 +21,9 @@ export default function Register() {
       email: data.get('email'),
       password: data.get('password'),
     });
+    
   };
-
+  const theme = useTheme();
   return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -46,6 +48,23 @@ export default function Register() {
               name="username"
               autoComplete="text"
               autoFocus
+              InputLabelProps={{
+                sx: {
+                  '&.Mui-focused': { // this targets the focused state of the label
+                    color: theme.palette.secondary.main, // change the label color to secondary color when focused
+                  },
+                },
+              }}
+              sx={{
+                '& .Mui-focused': { // this targets the focused state
+                  color: theme.palette.secondary.main, // change the text color to secondary color when focused
+                },
+                '& .MuiOutlinedInput-root': { // this targets the input element
+                  '&.Mui-focused fieldset': { // this targets the focused state of the fieldset
+                    borderColor: theme.palette.secondary.main, // change the border color to secondary color when focused
+                  },
+                },
+              }}
             />
             <TextField
               margin="normal"
@@ -56,6 +75,23 @@ export default function Register() {
               name="email"
               autoComplete="email"
               autoFocus
+              InputLabelProps={{
+                sx: {
+                  '&.Mui-focused': { // this targets the focused state of the label
+                    color: theme.palette.secondary.main, // change the label color to secondary color when focused
+                  },
+                },
+              }}
+              sx={{
+                '& .Mui-focused': { // this targets the focused state
+                  color: theme.palette.secondary.main, // change the text color to secondary color when focused
+                },
+                '& .MuiOutlinedInput-root': { // this targets the input element
+                  '&.Mui-focused fieldset': { // this targets the focused state of the fieldset
+                    borderColor: theme.palette.secondary.main, // change the border color to secondary color when focused
+                  },
+                },
+              }}
             />
             <TextField
               margin="normal"
@@ -66,6 +102,23 @@ export default function Register() {
               type="password"
               id="password"
               autoComplete="current-password"
+              InputLabelProps={{
+                sx: {
+                  '&.Mui-focused': { // this targets the focused state of the label
+                    color: theme.palette.secondary.main, // change the label color to secondary color when focused
+                  },
+                },
+              }}
+              sx={{
+                '& .Mui-focused': { // this targets the focused state
+                  color: theme.palette.secondary.main, // change the text color to secondary color when focused
+                },
+                '& .MuiOutlinedInput-root': { // this targets the input element
+                  '&.Mui-focused fieldset': { // this targets the focused state of the fieldset
+                    borderColor: theme.palette.secondary.main, // change the border color to secondary color when focused
+                  },
+                },
+              }}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -75,7 +128,8 @@ export default function Register() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              
+              sx={{ mt: 3, mb: 2, bgcolor: theme.palette.secondary.main}}
             >
               Register
             </Button>

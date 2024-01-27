@@ -1,7 +1,7 @@
 "use client";
 
 import TrackDisplay from "@/components/TrackDisplay";
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useState } from "react";
 import { fetchWithProjectId } from "@/utils";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -14,10 +14,18 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
 import Button from '@mui/material/Button';
+import { PlayerList } from '@/components/Context/PlayerList';
+
 
 const page = () => {
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { addToLast, clearPlaylist } = useContext(PlayerList);
+
+  const handlePlayAll = () => {
+    clearPlaylist();
+    tracks.forEach((track) => addToLast(track));
+};
 
   useEffect(() => {
     const fetchTrending = async () => {
@@ -32,13 +40,15 @@ const page = () => {
     fetchTrending();
   }, []);
 
+
+
   if (loading) {
     return <CircularProgress />;
   }
 
   return (
     <>
-      {HeroCard(tracks)}
+      {HeroCard(tracks, handlePlayAll, clearPlaylist)}
       <TrackDisplay tracks={tracks} />
     </>
   );
@@ -46,7 +56,7 @@ const page = () => {
 
 export default page;
 
-const HeroCard = (tracks) => {
+const HeroCard = (tracks, handlePlayAll, clearPlaylist) => {
   // Check if tracks array is not empty
   if (tracks.length > 0) {
     return (
@@ -85,7 +95,8 @@ const HeroCard = (tracks) => {
             <br />
             20 Tracks
           </Typography>
-          <Button variant="contained" sx={{ borderRadius: '20px',  }} >Play</Button>
+          <Button variant="contained" sx={{ borderRadius: '20px',  }} onClick={handlePlayAll}>Play All</Button>
+          <Button variant="contained" sx={{ borderRadius: "20px", marginLeft: "20px" }} onClick={clearPlaylist}>clear playlist</Button>
         </div>
       </Box>
     );
