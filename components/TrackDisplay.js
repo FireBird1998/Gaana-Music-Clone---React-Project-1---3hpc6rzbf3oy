@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,20 +8,23 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import { CardActionArea } from '@mui/material';
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import { CardActionArea } from "@mui/material";
 
 import { PlayerList } from "./Context/PlayerList";
+import SongLikeComponent from "./UserComponent/SongLikeComponent";
+import { AuthContext } from "./Context/AuthContex";
 
-const TrackDisplay = ({tracks}) => {
-
+const TrackDisplay = ({ tracks }) => {
   const { addToFront, clearPlaylist } = React.useContext(PlayerList);
   const handleAddToFront = (track) => {
     clearPlaylist();
     addToFront(track);
-  }
+  };
+
+  const authContext = React.useContext(AuthContext);
 
   return (
     <TableContainer component={Paper}>
@@ -29,6 +33,9 @@ const TrackDisplay = ({tracks}) => {
           <TableRow>
             <TableCell>Track</TableCell>
             <TableCell align="left">Artists</TableCell>
+            {authContext.isUserAuthenticated() && (
+              <TableCell align="center">Like</TableCell>
+            )}
             <TableCell align="center">Duration</TableCell>
           </TableRow>
         </TableHead>
@@ -37,21 +44,36 @@ const TrackDisplay = ({tracks}) => {
             <TableRow
               key={track._id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              
             >
-              <TableCell component="th" scope="row" sx={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-                cursor: 'pointer',
-
-              }}
-              onClick={() => handleAddToFront(track)}
+              <TableCell
+                component="th"
+                scope="row"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  cursor: "pointer",
+                }}
+                onClick={() => handleAddToFront(track)}
               >
-                {songCard(track.thumbnail, track.title, track, handleAddToFront)}
+                {songCard(
+                  track.thumbnail,
+                  track.title,
+                  track,
+                  handleAddToFront
+                )}
                 {track.title}
               </TableCell>
-              <TableCell align="left">{track.artist[0].name}</TableCell>
+              <TableCell align="left">
+                {track.artist.map((artist, index) => (
+                  <span key={index}>{artist.name}, </span>
+                ))}
+              </TableCell>
+              {authContext.isUserAuthenticated() && (
+                <TableCell align="center">
+                  <SongLikeComponent id={track._id} />
+                </TableCell>
+              )}
               <TableCell align="center">no data</TableCell>
             </TableRow>
           ))}
@@ -62,15 +84,18 @@ const TrackDisplay = ({tracks}) => {
 };
 
 const songCard = (img, title, track, handleAddToFront) => (
-  <Card sx={{ 
+  <Card
+    sx={{
       width: 48,
       height: 48,
-  }}
-  onClick={() => handleAddToFront(track)}
+    }}
+    onClick={() => handleAddToFront(track)}
   >
-    <CardActionArea sx={{
-      position: 'relative',
-    }}>
+    <CardActionArea
+      sx={{
+        position: "relative",
+      }}
+    >
       <CardMedia
         component="img"
         height="48"
@@ -78,14 +103,13 @@ const songCard = (img, title, track, handleAddToFront) => (
         image={img}
         alt={title}
       />
-      <CardContent sx={{
-          position: 'absolute',
-      }}>
-        
-      </CardContent>
+      <CardContent
+        sx={{
+          position: "absolute",
+        }}
+      ></CardContent>
     </CardActionArea>
   </Card>
 );
-
 
 export default TrackDisplay;
