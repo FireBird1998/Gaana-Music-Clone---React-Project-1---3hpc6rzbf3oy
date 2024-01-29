@@ -13,14 +13,18 @@ import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 
 import { PlayerList } from "./Context/PlayerList";
+import SongLikeComponent from "./UserComponent/SongLikeComponent";
+import { AuthContext } from "./Context/AuthContex";
 
 const TrackDisplay2 = ({ tracks, artistArray }) => {
-  const { addToFront, clearPlaylist, addToLast } = React.useContext(PlayerList);
+  const { addToFront, clearPlaylist } = React.useContext(PlayerList);
 
   const handleAddToFront = (track) => {
     clearPlaylist();
     addToFront(track);
   };
+
+  const authContext = React.useContext(AuthContext);
 
   return (
     <TableContainer component={Paper}>
@@ -29,6 +33,9 @@ const TrackDisplay2 = ({ tracks, artistArray }) => {
           <TableRow>
             <TableCell>Track</TableCell>
             <TableCell align="left">Artists</TableCell>
+            {authContext.isUserAuthenticated() && (
+              <TableCell align="center">Like</TableCell>
+            )}
             <TableCell align="center">Duration</TableCell>
           </TableRow>
         </TableHead>
@@ -47,9 +54,7 @@ const TrackDisplay2 = ({ tracks, artistArray }) => {
                 sx={{
                   "&:last-child td, &:last-child th": { border: 0 },
                 }}
-                onClick={() => {
-                  handleAddToFront(track);
-                }}
+                
               >
                 <TableCell
                   component="th"
@@ -64,13 +69,23 @@ const TrackDisplay2 = ({ tracks, artistArray }) => {
                     handleAddToFront(track);
                   }}
                 >
-                  {songCard(track.thumbnail, track.title, track, handleAddToFront)}
+                  {songCard(
+                    track.thumbnail,
+                    track.title,
+                    track,
+                    handleAddToFront
+                  )}
                   {track.title}
                 </TableCell>
 
                 <TableCell align="left">
                   {trackArtists.map((artist) => artist.name).join(", ")}
                 </TableCell>
+                {authContext.isUserAuthenticated() && (
+                  <TableCell align="center">
+                    <SongLikeComponent id={track._id} />
+                  </TableCell>
+                )}
                 <TableCell align="center">no data</TableCell>
               </TableRow>
             );

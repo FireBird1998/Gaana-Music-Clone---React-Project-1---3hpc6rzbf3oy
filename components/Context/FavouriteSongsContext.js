@@ -24,7 +24,12 @@ export const FavouriteSongsProvider = ({ children }) => {
           }
       })
       .then(response => response.json())
-      .then(data => setFavouriteSongs(data.songs)) // Update the songs state with the fetched data
+      .then(data => {
+        
+        console.log(data.data.songs);
+        
+        setFavouriteSongs(data.data.songs)
+      }) // Update the songs state with the fetched data
       .catch(error => console.error('Error:', error));
     }
   }
@@ -46,7 +51,6 @@ export const FavouriteSongsProvider = ({ children }) => {
       }
       const data = await response.json()
       toast.success(data.message);
-      console.log(data);
       updateFavoriteSongs(); // Update the favorite songs after the favoriteHandler function runs
     } catch (err) {
       console.error(err.message)
@@ -67,7 +71,7 @@ export const FavouriteSongsProvider = ({ children }) => {
             }
         })
         .then(response => response.json())
-        .then(data => setFavouriteSongs(data.songs)) // Update the songs state with the fetched data
+        .then(data => setFavouriteSongs(data.data.songs)) // Update the songs state with the fetched data
         .catch(error => console.error('Error:', error));
     }
   }, [authContext]);

@@ -65,8 +65,8 @@ const TrackDisplay = ({ tracks }) => {
                 {track.title}
               </TableCell>
               <TableCell align="left">
-                {track.artist.map((artist, index) => (
-                  <span key={index}>{artist.name}, </span>
+                {track.artist.map((artist) => (
+                  <span key={artist._id}>{artist.name}, </span>
                 ))}
               </TableCell>
               {authContext.isUserAuthenticated() && (
