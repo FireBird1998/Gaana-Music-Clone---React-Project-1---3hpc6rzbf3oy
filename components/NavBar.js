@@ -27,6 +27,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import Button from "@mui/material/Button";
+import { useMediaQuery } from "@mui/material";
 
 // constants import
 import { primaryNavLinks, secondaryNavLinks } from "@/public/constants";
@@ -126,6 +127,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     [theme.breakpoints.up("md")]: {
       width: "30ch",
     },
+    [theme.breakpoints.down("md")]: {
+      width: "20ch",
+    },
   },
 }));
 
@@ -182,6 +186,8 @@ export default function NavBar({ content, themeToggle }) {
   const router = useRouter();
   const pathname = usePathname();
   const [active, setActive] = React.useState(pathname);
+  const isScreenSmall = useMediaQuery("(max-width:1100px)");
+  const isScreenSuperSmall = useMediaQuery("(max-width:700px)");
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -245,7 +251,6 @@ export default function NavBar({ content, themeToggle }) {
                     height={26}
                     width={100}
                   />
-                  
                 </Link>
                 <Search>
                   <SearchIconWrapper>
@@ -268,7 +273,6 @@ export default function NavBar({ content, themeToggle }) {
                   marginLeft: "30px",
                 }}
               >
-                
                 {/* <Link
                   href={`/loginRegister`}
                   className={`${
@@ -281,35 +285,41 @@ export default function NavBar({ content, themeToggle }) {
                   Log in/Sign Up
                 </Link> */}
 
-                <AuthComponent />
+                {!isScreenSuperSmall && (
+                  <>
+                    <AuthComponent />
 
-                <FormGroup>
-                  <FormControlLabel
-                    control={
-                      <MaterialUISwitch
-                        sx={{ m: 1 }}
-                        defaultChecked
-                        onChange={themeToggle}
+                    <FormGroup>
+                      <FormControlLabel
+                        control={
+                          <MaterialUISwitch
+                            sx={{ m: 1 }}
+                            defaultChecked
+                            onChange={themeToggle}
+                          />
+                        }
                       />
-                    }
-                  />
-                </FormGroup>
+                    </FormGroup>
+                  </>
+                )}
 
-                <Button
-                  variant="contained"
-                  onClick={goToGannaPlus}
-                  sx={{
-                    background: 'linear-gradient(90deg, rgba(255,2,5,1) 20%, rgba(255,105,0,1) 80%)',
-                    color: "white",
-                    borderRadius: "50px",
-                    fontSize: "13px",
-                    fontStyle: "bloder",
-                    marginRight: "20px",
-
-                  }}
-                >
-                  Get Gaana Plus
-                </Button>
+                {!isScreenSmall && (
+                  <Button
+                    variant="contained"
+                    onClick={goToGannaPlus}
+                    sx={{
+                      background:
+                        "linear-gradient(90deg, rgba(255,2,5,1) 20%, rgba(255,105,0,1) 80%)",
+                      color: "white",
+                      borderRadius: "50px",
+                      fontSize: "13px",
+                      fontStyle: "bloder",
+                      marginRight: "20px",
+                    }}
+                  >
+                    Get Gaana Plus
+                  </Button>
+                )}
               </Box>
             </Box>
           </Toolbar>
@@ -378,6 +388,24 @@ export default function NavBar({ content, themeToggle }) {
                 </Link>
               </ListItem>
             ))}
+
+            {isScreenSuperSmall && (
+              <FormGroup
+                sx={{
+                  ml: 1,
+                }}
+              >
+                <FormControlLabel
+                  control={
+                    <MaterialUISwitch
+                      sx={{ m: 1 }}
+                      defaultChecked
+                      onChange={themeToggle}
+                    />
+                  }
+                />
+              </FormGroup>
+            )}
           </List>
         </Drawer>
         <Main open={open}>

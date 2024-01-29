@@ -118,10 +118,10 @@ const NavFilter = () => {
         <StyledLink underline="hover" color="inherit" href="/album">
           Album
         </StyledLink>
-        <StyledLink underline="hover" color="inherit" href="/">
+        <StyledLink underline="hover" color="inherit" href="/radio">
           Radio
         </StyledLink>
-        <StyledLink underline="hover" color="inherit" href="/">
+        <StyledLink underline="hover" color="inherit" href="/podcast">
           Podcast
         </StyledLink>
         <StyledLink underline="hover" color="inherit" href="/myMusic">

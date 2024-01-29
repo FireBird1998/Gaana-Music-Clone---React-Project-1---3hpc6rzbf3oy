@@ -6,7 +6,8 @@ import { AuthContext } from "@/components/Context/AuthContex";
 import { FavouriteSongsContext } from "@/components/Context/FavouriteSongsContext";
 import UserHero from "@/components/UserComponent/UserHero";
 import toast from "react-hot-toast";
-import TrackDisplay2 from "@/components/TrackDisplay2";
+import FavouriteTracks from "@/components/UserComponent/FavouriteTracks";
+
 import AuthComponent from "@/components/AuthComponent";
 import { Box } from "@mui/material";
 
@@ -28,7 +29,7 @@ const Page = () => {
       {authContext.isUserAuthenticated() ? (
         <>
           <UserHero name={authContext.authState.userInfo.name} />
-          {/* <TrackDisplay2 /> */} 
+          <FavouriteTracks/>
         </>
       ) : (
         <Box

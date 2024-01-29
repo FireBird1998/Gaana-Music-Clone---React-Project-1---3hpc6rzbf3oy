@@ -19,11 +19,6 @@ export const primaryNavLinks = [
       title: "My Music",
       path: "/myMusic",
     },
-    {
-      id: "indias-music",
-      title: "India's Music",
-      path: "/indias-music",
-    },
   ];
 
   export const secondaryNavLinks = [ 

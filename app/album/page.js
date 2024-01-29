@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 
 import CarocelComponent from "@/components/CarocelComponent";
 import { fetchWithProjectId } from "@/utils";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, CircularProgress } from "@mui/material";
 
 const Page = () => {
   const [albums, setAlbums] = useState([]);
@@ -23,30 +23,44 @@ const Page = () => {
   }, []);
 
   return (
-    <Box
-      sx={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-        gap: 2,
-      }}
-    >
-      {albums.map((album) => (
-        <Box sx={{
-            gap: 1,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            
-
-            }}>
-          <CarocelComponent key={album._id} img={album.image} id={album._id} />
-          <Typography variant="h6" component="h6">
-            {album.title}
-          </Typography>
+    <>
+      <Typography variant="h4" component="h4" sx={{ mb: 2 }}>
+        Welcome To Albums Page
+      </Typography>
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+            gap: 2,
+          }}
+        >
+          {albums.map((album) => (
+            <Box
+              key={album._id}
+              sx={{
+                gap: 1,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <CarocelComponent
+                key={album._id}
+                img={album.image}
+                id={album._id}
+              />
+              <Typography variant="h6" component="h6">
+                {album.title}
+              </Typography>
+            </Box>
+          ))}
         </Box>
-      ))}
-    </Box>
+      )}
+    </>
   );
 };
 
