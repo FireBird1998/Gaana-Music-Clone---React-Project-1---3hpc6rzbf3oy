@@ -15,54 +15,62 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import CloseIcon from '@mui/icons-material/Close';
 import { useTheme } from "@mui/material/styles";
 
 //Utility function and others
-import { AuthContext } from "./Context/AuthContex";
+import { AuthContext } from "../Context/AuthContex";
 import toast from "react-hot-toast";
+import { Close } from "@mui/icons-material";
 
-export default function SignIn({ toggle, closeModal }) {
+export default function UpdatePassword({ closeModal, closeBtn }) {
   const theme = useTheme();
-  const { setAuthState } = useContext(AuthContext);
+  const authContext = useContext(AuthContext);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    //Preparing the body for the request
-    const bodyData = {
-      email: data.get("email"),
-      password: data.get("password"),
-      appType: "music",
-    };
+    // Get the form values
+    const name = data.get("name");
+    const email = data.get("email");
+    const password = data.get("password");
+    const currPassword = data.get("Currpassword");
 
-    loginUser(bodyData.email, bodyData.password);
+    if (!name || !email || !password || !currPassword) {
+      toast.error("Please fill in all fields");
+      return;
+    }
 
-    // console.log({
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    // });
+    updatePass(name, email, password, currPassword);
+
+    console.log(
+      data.get("name"),
+      data.get("email"),
+      data.get("password"),
+      data.get("Currpassword")
+    );
   };
 
-  /**
-   * Logs in a user with the provided email and password.
-   * @param {string} email - The user's email.
-   * @param {string} password - The user's password.
-   * @returns {Promise<Object>} - A promise that resolves to the JSON response from the login API.
-   */
-  async function loginUser(email, password) {
-    const url = "https://academics.newtonschool.co/api/v1/user/login";
+  async function updatePass(name, email, password, currPassword) {
+    const url =
+      "https://academics.newtonschool.co/api/v1/user/updateMyPassword";
+
     const data = {
+      name: name,
       email: email,
+      passwordCurrent: currPassword,
       password: password,
       appType: "music",
     };
 
     try {
       const response = await fetch(url, {
-        method: "POST",
+        method: "PATCH",
         headers: {
           projectId: "f104bi07c49",
           "Content-Type": "application/json",
+          Authorization: `Bearer ${authContext.authState.token}`,
         },
         body: JSON.stringify(data),
       });
@@ -75,9 +83,8 @@ export default function SignIn({ toggle, closeModal }) {
         const jsonResponse = await response.json();
 
         console.log(jsonResponse);
-        toast.success("Login Successful");
-        setAuthState(jsonResponse);
-        closeModal(); // set the auth state
+        toast.success("Password Upadated Successfully");
+        closeModal(); // Close the modal after successful password update
         return jsonResponse;
       }
     } catch (error) {
@@ -90,16 +97,57 @@ export default function SignIn({ toggle, closeModal }) {
       <CssBaseline />
       <Box
         sx={{
+          position: "relative",
           marginTop: 8,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          bgcolor: theme.palette.background.paper,
+          px: 8,
+          py: 6,
+          borderRadius: "10px",
         }}
       >
         <Typography component="h1" variant="h5">
-          Sign in
+          Update Password
         </Typography>
+        {closeBtn && 
+          (<Avatar>
+            <CloseIcon onClick={closeModal} />
+          </Avatar>)
+        }
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="name"
+            label=" Full Name"
+            name="name"
+            autoComplete="text"
+            autoFocus
+            InputLabelProps={{
+              sx: {
+                "&.Mui-focused": {
+                  // this targets the focused state of the label
+                  color: theme.palette.secondary.main, // change the label color to secondary color when focused
+                },
+              },
+            }}
+            sx={{
+              "& .Mui-focused": {
+                // this targets the focused state
+                color: theme.palette.secondary.main, // change the text color to secondary color when focused
+              },
+              "& .MuiOutlinedInput-root": {
+                // this targets the input element
+                "&.Mui-focused fieldset": {
+                  // this targets the focused state of the fieldset
+                  borderColor: theme.palette.secondary.main, // change the border color to secondary color when focused
+                },
+              },
+            }}
+          />
           <TextField
             margin="normal"
             required
@@ -135,8 +183,39 @@ export default function SignIn({ toggle, closeModal }) {
             margin="normal"
             required
             fullWidth
+            name="Currpassword"
+            label="Current Password"
+            type="password"
+            id="Currpassword"
+            autoComplete="current-password"
+            InputLabelProps={{
+              sx: {
+                "&.Mui-focused": {
+                  // this targets the focused state of the label
+                  color: theme.palette.secondary.main, // change the label color to secondary color when focused
+                },
+              },
+            }}
+            sx={{
+              "& .Mui-focused": {
+                // this targets the focused state
+                color: theme.palette.secondary.main, // change the text color to secondary color when focused
+              },
+              "& .MuiOutlinedInput-root": {
+                // this targets the input element
+                "&.Mui-focused fieldset": {
+                  // this targets the focused state of the fieldset
+                  borderColor: theme.palette.secondary.main, // change the border color to secondary color when focused
+                },
+              },
+            }}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
             name="password"
-            label="Password"
+            label="New Password"
             type="password"
             id="password"
             autoComplete="current-password"
@@ -162,10 +241,6 @@ export default function SignIn({ toggle, closeModal }) {
               },
             }}
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="secondary" />}
-            label="Remember me"
-          />
           <Button
             type="submit"
             fullWidth
@@ -173,22 +248,8 @@ export default function SignIn({ toggle, closeModal }) {
             onSubmit={handleSubmit}
             sx={{ mt: 3, mb: 2, bgcolor: theme.palette.secondary.main }} // use theme color
           >
-            Sign In
+            Update Password
           </Button>
-          <Grid container>
-            <Grid item>
-              <Link
-                href="#"
-                onClick={() => {
-                  toggle();
-                }}
-                variant="body2"
-                sx={{ color: theme.palette.secondary.main }}
-              >
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
         </Box>
       </Box>
     </Container>

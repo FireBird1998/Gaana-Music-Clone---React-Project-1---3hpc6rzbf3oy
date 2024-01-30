@@ -26,6 +26,8 @@ const AuthComponent = () => {
 
   const handleToggle = () => setToggle(!toggle);
 
+  
+
   const theme = useTheme();
   const style = {
     position: "absolute",
@@ -56,7 +58,7 @@ const AuthComponent = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={style}> 
           <Switch checked={toggle} onChange={handleToggle} color="secondary" />
           {toggle ? <Register toggle={handleToggle} /> : <SignIn toggle={handleToggle} closeModal={handleClose} />}
         </Box>
@@ -64,5 +66,7 @@ const AuthComponent = () => {
     </div>
   );
 };
+
+
 
 export default AuthComponent;

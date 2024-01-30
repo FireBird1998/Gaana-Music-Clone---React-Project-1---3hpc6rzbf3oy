@@ -8,9 +8,9 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
-import PersonAdd from "@mui/icons-material/PersonAdd";
-import Settings from "@mui/icons-material/Settings";
+
 import Logout from "@mui/icons-material/Logout";
+
 
 const UserInfo = ({ name, logout }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -21,6 +21,12 @@ const UserInfo = ({ name, logout }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+
+ 
+
+
+
   return (
     <React.Fragment>
       <Box
@@ -44,6 +50,7 @@ const UserInfo = ({ name, logout }) => {
               {name[0].toUpperCase()}
             </Avatar>
           </IconButton>
+          
         </Tooltip>
         <Typography variant="h6">{name}</Typography>
       </Box>
@@ -84,6 +91,8 @@ const UserInfo = ({ name, logout }) => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
+        
+        
         <MenuItem
           onClick={() => {
             handleClose();
@@ -95,6 +104,7 @@ const UserInfo = ({ name, logout }) => {
           </ListItemIcon>
           Logout
         </MenuItem>
+        
       </Menu>
     </React.Fragment>
   );
