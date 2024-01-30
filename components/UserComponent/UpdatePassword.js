@@ -1,18 +1,13 @@
 "use client";
 
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 
 //mui component and theme
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import CloseIcon from '@mui/icons-material/Close';
@@ -23,7 +18,7 @@ import { AuthContext } from "../Context/AuthContex";
 import toast from "react-hot-toast";
 import { Close } from "@mui/icons-material";
 
-export default function UpdatePassword({ closeModal, closeBtn }) {
+const UpdatePassword = React.forwardRef(({ closeModal, closeBtn }, ref) => {
   const theme = useTheme();
   const authContext = useContext(AuthContext);
 
@@ -93,7 +88,7 @@ export default function UpdatePassword({ closeModal, closeBtn }) {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" ref={ref}>
       <CssBaseline />
       <Box
         sx={{
@@ -254,4 +249,7 @@ export default function UpdatePassword({ closeModal, closeBtn }) {
       </Box>
     </Container>
   );
-}
+});
+
+
+export default UpdatePassword;

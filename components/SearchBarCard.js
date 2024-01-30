@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -6,23 +6,23 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+import { useTheme } from "@mui/material/styles";
+import { PlayerList } from "./Context/PlayerList";
 
-
-import { useRouter } from "next/navigation";
-
-const CarocelComponent = ({ img, id }) => {
-  const router = useRouter();
-
-  const handleClick = () => {
-    router.push(`/album/${id}`);
+const SearchBarCard = ({ img, title, track }) => {
+  const { addToFront, clearPlaylist } = useContext(PlayerList);
+  const handleAddToFront = () => {
+    clearPlaylist();
+    addToFront(track);
   };
+
+  const theme = useTheme();
 
   return (
     <Card
       sx={{
         maxWidth: 245,
         maxHeight: 245,
-        backgroundColor: "#fff",
       }}
     >
       <CardActionArea
@@ -32,7 +32,7 @@ const CarocelComponent = ({ img, id }) => {
             visibility: "visible",
           },
         }}
-        onClick={handleClick}
+        onClick={handleAddToFront}
       >
         <CardMedia
           component="img"
@@ -63,8 +63,19 @@ const CarocelComponent = ({ img, id }) => {
           />
         </CardContent>
       </CardActionArea>
+      <Typography
+        gutterBottom
+        variant="p"
+        component="div"
+        sx={{
+          textAlign: "center",
+          color: theme.palette.secondary.main,
+        }}
+      >
+        {title}
+      </Typography>
     </Card>
   );
 };
 
-export default CarocelComponent;
+export default SearchBarCard;

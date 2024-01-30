@@ -41,6 +41,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import Stack from "@mui/material/Stack";
 import AuthComponent from "./AuthComponent";
+import SearchWithModal from "./SearchWithModal";
 
 const drawerWidth = 240;
 
@@ -87,50 +88,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
-}));
-
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: "50px",
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    paddingRight: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "30ch",
-    },
-    [theme.breakpoints.down("md")]: {
-      width: "20ch",
-    },
-  },
 }));
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
@@ -252,15 +209,8 @@ export default function NavBar({ content, themeToggle }) {
                     width={100}
                   />
                 </Link>
-                <Search>
-                  <SearchIconWrapper>
-                    <SearchIcon />
-                  </SearchIconWrapper>
-                  <StyledInputBase
-                    placeholder="Search Artist, Songs, Albums"
-                    inputProps={{ "aria-label": "search" }}
-                  />
-                </Search>
+
+                <SearchWithModal />
               </Box>
 
               <Box
@@ -273,17 +223,7 @@ export default function NavBar({ content, themeToggle }) {
                   marginLeft: "30px",
                 }}
               >
-                {/* <Link
-                  href={`/loginRegister`}
-                  className={`${
-                    pathname === "/loginRegister"
-                      ? styles.otherActive
-                      : styles.otherLink
-                  } `}
-                  style={{ color: theme.palette.text.primary }} // Add this line
-                >
-                  Log in/Sign Up
-                </Link> */}
+                
 
                 {!isScreenSuperSmall && (
                   <>
