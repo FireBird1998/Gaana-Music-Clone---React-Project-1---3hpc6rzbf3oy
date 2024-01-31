@@ -14,10 +14,7 @@ import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "Gaana.com clone",
-  description: "Next.js gana",
-};
+
 
 const lightTheme = createTheme({
   palette: {
