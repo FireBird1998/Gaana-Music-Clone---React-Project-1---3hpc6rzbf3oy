@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import { HeroSectionProvider } from '@/components/Context/HeroContext';
 import HomeBody from "@/components/Home/HomeBody"
+import Footer from "@/components/Footer"
 
 
 
@@ -26,6 +27,8 @@ const Home = () => {
         <HeroSection/>
       </HeroSectionProvider>
       <HomeBody  />
+
+      <Footer/>
       
 
 
