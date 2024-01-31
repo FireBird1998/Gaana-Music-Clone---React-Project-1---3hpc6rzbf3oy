@@ -25,7 +25,7 @@ const Player = () => {
     const style = document.createElement("style");
     style.innerHTML = `
       .rhap_container {
-        background: ${theme.palette.background.default};
+        background: ${theme.palette.background.paper};
       }
       .rhap_main-controls-button svg {
         color: ${theme.palette.secondary.main};
@@ -80,7 +80,8 @@ const Player = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100%",
+        height: "100%",  
+        boxShadow: "0 4px 8px 0 rgba(255, 0, 0, 1), 0 6px 20px 0 rgba(255, 0, 0, 0.5)"
       }}
     >
       <Box
@@ -130,8 +131,8 @@ const SongCard = ({ img, title }) => {
   return (
     <Card
       sx={{
-        maxWidth: 74,
-        maxHeight: 74,
+        maxWidth: 72,
+        maxHeight: 72,
       }}
     >
       <CardActionArea>
