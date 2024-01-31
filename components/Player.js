@@ -12,11 +12,13 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 
 import { PlayerList } from "./Context/PlayerList";
+import { AuthContext } from "./Context/AuthContex";
 import LikeSongComponent from "./UserComponent/LikeSongComponent";
 
 const Player = () => {
   const theme = useTheme();
   const { players } = useContext(PlayerList);
+  const authContex = useContext(AuthContext);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const playerRef = useRef();
   useEffect(() => {
@@ -104,7 +106,7 @@ const Player = () => {
               {`${players[currentTrackIndex].title}`}
               
             </Typography>
-            <LikeSongComponent id={players[currentTrackIndex]._id}/>
+            {authContex.isUserAuthenticated() && (<LikeSongComponent id={players[currentTrackIndex]._id}/>)}
 
           </Box>
         )}
