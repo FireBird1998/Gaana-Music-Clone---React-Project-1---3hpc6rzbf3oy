@@ -13,7 +13,7 @@ import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 
 import { PlayerList } from "./Context/PlayerList";
-import SongLikeComponent from "./UserComponent/SongLikeComponent";
+import SongLikeComponent from "@/components/UserComponent/SongLikeComponent";
 import { AuthContext } from "./Context/AuthContex";
 
 const TrackDisplay2 = ({ tracks, artistArray }) => {

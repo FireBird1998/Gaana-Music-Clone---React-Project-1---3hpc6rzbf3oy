@@ -15,7 +15,7 @@ import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 
 import { PlayerList } from "../Context/PlayerList";
-import SongLikeComponent from "../UserComponent/SongLikeComponent";
+import SongLikeComponent from "./SongLikeComponent";
 import { FavouriteSongsContext } from "../Context/FavouriteSongsContext";
 import { AuthContext } from "../Context/AuthContex";
 
