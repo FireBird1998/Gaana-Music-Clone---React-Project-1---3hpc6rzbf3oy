@@ -15,7 +15,7 @@ import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 
 import { PlayerList } from "../Context/PlayerList";
-import SongLikeComponent from "./SongLikeComponent";
+import LikeSongComponent from "./LikeSongComponent";
 import { FavouriteSongsContext } from "../Context/FavouriteSongsContext";
 import { AuthContext } from "../Context/AuthContex";
 
@@ -144,7 +144,7 @@ const fetchArtists = async () => {
                 </TableCell>
                 {authContext.isUserAuthenticated() && (
                   <TableCell align="center">
-                    <SongLikeComponent id={track._id} />
+                    <LikeSongComponent id={track._id} />
                   </TableCell>
                 )}
                 <TableCell align="center">no data</TableCell>

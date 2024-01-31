@@ -13,7 +13,7 @@ import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 
 import { PlayerList } from "./Context/PlayerList";
-import SongLikeComponent from "@/components/UserComponent/SongLikeComponent";
+import LikeSongComponent from "@/components/UserComponent/LikeSongComponent";
 import { AuthContext } from "./Context/AuthContex";
 
 const TrackDisplay2 = ({ tracks, artistArray }) => {
@@ -83,7 +83,7 @@ const TrackDisplay2 = ({ tracks, artistArray }) => {
                 </TableCell>
                 {authContext.isUserAuthenticated() && (
                   <TableCell align="center">
-                    <SongLikeComponent id={track._id} />
+                    <LikeSongComponent id={track._id} />
                   </TableCell>
                 )}
                 <TableCell align="center">no data</TableCell>

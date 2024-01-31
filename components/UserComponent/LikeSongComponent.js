@@ -6,7 +6,7 @@ import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 
 import { FavouriteSongsContext } from "../Context/FavouriteSongsContext";
 
-const SongLikeComponent = ({ id }) => {
+const LikeSongComponent = ({ id }) => {
   const { favoriteSongs, favoriteHandler } = React.useContext(FavouriteSongsContext);
   const isFavorite = favoriteSongs && favoriteSongs.some(song => song._id === id);
 
@@ -28,29 +28,6 @@ const SongLikeComponent = ({ id }) => {
   );
 };
 
-export default SongLikeComponent;
+export default LikeSongComponent;
 
-// const favoriteHandler = async function () {
-//   try {
-//     const response = await fetch(`https://academics.newtonschool.co/api/v1/music/favorites/like`, {
-//       method: 'PATCH',
-//       headers: {
-//         Authorization: `Bearer ${authState.token}`,
-//         projectId: 'f104bi07c49',
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({ songId: id }),
-//     })
-//     if (!response.ok) {
-//       toast.error('There was a error during adding/removing songs')
-//       throw new Error('Something went wrong during setting up of favorite.')
 
-//     }
-//     const data = await response.json()
-
-//     console.log(data)
-//   } catch (err) {
-
-//     console.error(err.message)
-//   }
-// }
