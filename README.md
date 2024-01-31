@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Ganna Clone: A Music Player App
 
-## Getting Started
+## Project Overview
 
-First, run the development server:
+This project is a clone of the popular music streaming platform, Ganna. It's a breakthrough project for me as it's the first time I've built a large-scale project without following any tutorials. Despite some code repetition and unconventional file structure, this project has been a great learning experience.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Live View
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The live project can be accessed [here](https://gaana-music-clone-react-project-1-3hpc6rzbf3oy-a8o5.vercel.app).
 
 
+
+## Features
+
+- **User Authentication**: Users can register and sign in to access the music player.
+- **Music Player**: Users can sign in and add songs to their playlist after signing in.
+- **Search Music**: Users can search music and play them. 
+
+
+## Tech Stack
+
+The project is built using the following technologies:
+
+- **React**: A JavaScript library for building user interfaces.
+- **Next.js**: A React framework for production-grade applications.
+- **@emotion/react and @emotion/styled**: Libraries for writing CSS styles with JavaScript.
+- **@mui/material and @mui/icons-material**: Material-UI components for faster and easier web development.
+- **react-h5-audio-player**: A customizable HTML5 audio player for React.
+- **react-hot-toast**: A library for adding toast notifications to React apps.
+- **styled-components**: A library for styling React components.
+- **swiper**: A modern mobile touch slider.
+
+## API
+
+The data for the songs is provided by Newton API.
+
+## Learnings
+
+This project has been a significant learning curve, especially in terms of component reusability and the fundamentals of building large projects. It has also helped me understand the importance of decision-making in software development.
+
+## Future Work
+
+I plan to continue refining the project, focusing on improving the code structure and reducing repetition. I'm also considering expanding the project's scope and adding more features.
