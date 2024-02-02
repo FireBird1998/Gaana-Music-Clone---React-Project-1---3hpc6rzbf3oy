@@ -7,6 +7,7 @@ import SearchBarCard from "./SearchBarCard";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/bundle";
+import toast from "react-hot-toast";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -70,20 +71,22 @@ const style = {
 // Debounce function
 function debounce(func, delay) {
   let timerId;
-  return function () {
-    const context = this;
-    const args = arguments;
-    clearTimeout(timerId);
-    timerId = setTimeout(function () {
-      func.apply(context, args);
+  return function (...args) {
+    if (timerId) {
+      clearTimeout(timerId);
+    }
+    timerId = setTimeout(() => {
+      func(...args);
     }, delay);
   };
 }
+
 
 const SearchWithModal = () => {
   const [open, setOpen] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const theme = useTheme();
 
 
@@ -93,27 +96,46 @@ const SearchWithModal = () => {
 
   // Debounce the API call
   const debouncedSearch = debounce((query) => {
-    fetch(
-      `https://academics.newtonschool.co/api/v1/music/song?search={"title":"${query}"}`,
-      {
-        headers: {
-          projectid: "f104bi07c49",
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.data);
-
-        setSearchResults(data.data);
-      });
-  }, 500); // Adjust delay as needed
-
+    if (!isLoading) {
+      setIsLoading(true);
+      fetch(
+        `https://academics.newtonschool.co/api/v1/music/song?search={"title":"${query}"}`,
+        {
+          headers: {
+            projectid: "f104bi07c49",
+          },
+        }
+      )
+        .then((response) => {
+          if (!response.ok) {
+            if (response.status === 404) {
+              throw new Error('No Search Result');
+            } else {
+              throw new Error('Network response was not ok');
+            }
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data.data);
+          setSearchResults(data.data);
+        })
+        .catch((error) => {
+          console.error('There has been a problem with your fetch operation:', error);
+          
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+  }, 1000); // Adjust delay as needed
+  
   useEffect(() => {
     if (searchTerm) {
       debouncedSearch(searchTerm);
     }
   }, [searchTerm]);
+  
 
   return (
     <Box>
