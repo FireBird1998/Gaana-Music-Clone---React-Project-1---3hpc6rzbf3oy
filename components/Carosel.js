@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useRef, useState, useEffect, useContext } from "react";
+import React from "react";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -12,7 +12,7 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Navigation } from "swiper/modules";
-import { FreeMode, Pagination, Autoplay } from "swiper/modules";
+import { FreeMode, Autoplay } from "swiper/modules";
 
 import CarocelComponent from "./CarocelComponent";
 
@@ -24,7 +24,6 @@ const Carosel = ({albums}) => {
 
 
   return (
-    <>
       <Swiper
         navigation={true}
         slidesPerView={1}
@@ -77,7 +76,6 @@ const Carosel = ({albums}) => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </>
   );
 };
 
