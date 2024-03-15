@@ -14,9 +14,11 @@ import StarIcon from "@mui/icons-material/Star";
 import Paper from "@mui/material/Paper";
 
 import { useTheme } from "@mui/material/styles";
+import { useRouter } from "next/navigation";
 
 const getGaanaPlus = () => {
   const theme = useTheme();
+  const router = useRouter();
 
   const tiers = [
     {
@@ -30,18 +32,14 @@ const getGaanaPlus = () => {
       title: "6 Month Ganna Plus",
       subheader: "Most popular",
       price: "249",
-      description: [
-       "Ganna Plus"
-      ],
+      description: ["Ganna Plus"],
       buttonText: "Buy Now",
       buttonVariant: "contained",
     },
     {
       title: "1 Year Ganna Plus",
       price: "549",
-      description: [
-        "Ganna Plus"
-      ],
+      description: ["Ganna Plus"],
       buttonText: "Buy now",
       buttonVariant: "outlined",
     },
@@ -110,13 +108,20 @@ const getGaanaPlus = () => {
                   </ul>
                 </CardContent>
                 <CardActions>
-                  <Button fullWidth variant={tier.buttonVariant} sx={{
-                    color: theme.palette.secondary.main,
-                    borderColor: theme.palette.secondary.main,
-                    '&:hover': {
+                  <Button
+                    fullWidth
+                    variant={tier.buttonVariant}
+                    sx={{
+                      color: theme.palette.secondary.main,
                       borderColor: theme.palette.secondary.main,
-                    }
-                  }} >
+                      "&:hover": {
+                        borderColor: theme.palette.secondary.main,
+                      },
+                    }}
+                    onClick={() => {
+                      router.push("/comming-soon");
+                    }}
+                  >
                     {tier.buttonText}
                   </Button>
                 </CardActions>
@@ -183,32 +188,3 @@ const HeroCard = () => {
 };
 
 export default getGaanaPlus;
-
-// return (
-//   <Grid item xs={12} md={6}>
-//     <CardActionArea component="a" href="#">
-//       <Card sx={{ display: 'flex' }}>
-//         <CardContent sx={{ flex: 1 }}>
-//           <Typography component="h2" variant="h5">
-//             Gaana Plus
-//           </Typography>
-//           <Typography variant="subtitle1" color="text.secondary">
-//             Available on anroid and apple
-//           </Typography>
-//           <Typography variant="h5">
-//             Music Without limits
-//           </Typography>
-//           <Typography variant="subtitle1" paragraph>
-//             Enjoy ad-free access to india's smallest collection of songs.
-//           </Typography>
-//         </CardContent>
-//         <CardMedia
-//           component="img"
-//           sx={{ width: 160, display: { xs: 'none', sm: 'block' } }}
-//           image="/assets/redbackground.png"
-//           alt={`background`}
-//         />
-//       </Card>
-//     </CardActionArea>
-//   </Grid>
-// )

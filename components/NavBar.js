@@ -42,6 +42,7 @@ import Switch from "@mui/material/Switch";
 import Stack from "@mui/material/Stack";
 import AuthComponent from "./AuthComponent";
 import SearchWithModal from "./SearchWithModal";
+import Logo from "./Logo";
 
 const drawerWidth = 240;
 
@@ -142,6 +143,7 @@ export default function NavBar({ content, themeToggle }) {
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  console.log("pathname", pathname);
   const [active, setActive] = React.useState(pathname);
   const isScreenSmall = useMediaQuery("(max-width:1100px)");
   const isScreenSuperSmall = useMediaQuery("(max-width:700px)");
@@ -200,15 +202,7 @@ export default function NavBar({ content, themeToggle }) {
                   flexDirection: "row",
                 }}
               >
-                <Link href="/">
-                  <Box
-                    component="img"
-                    src="/assets/logo.png"
-                    alt="logo"
-                    height={26}
-                    width={100}
-                  />
-                </Link>
+                <Logo />
 
                 <SearchWithModal />
               </Box>
@@ -302,7 +296,9 @@ export default function NavBar({ content, themeToggle }) {
                   className={`${styles.link} ${
                     pathname === link.path ? styles.active : ""
                   }`}
-                  style={{ color: theme.palette.text.primary }} // Add this line
+                  style={{ 
+                    color: pathname === link.path ? theme.palette.secondary.main : theme.palette.text.primary 
+                  }}
                 >
                   <ListItemButton>
                     <ListItemText primary={link.title} />
@@ -320,7 +316,9 @@ export default function NavBar({ content, themeToggle }) {
                   className={`${styles.link} ${
                     pathname === link.path ? styles.active : ""
                   }`}
-                  style={{ color: theme.palette.text.primary }} // Add this line
+                  style={{ 
+                    color: pathname === link.path ? theme.palette.secondary.main : theme.palette.text.primary 
+                  }}
                 >
                   <ListItemButton>
                     <ListItemText primary={link.title} />
