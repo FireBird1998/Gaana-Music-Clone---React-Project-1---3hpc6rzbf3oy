@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import { styled, useTheme, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
@@ -8,6 +9,7 @@ import SearchBarCard from "./SearchBarCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/bundle";
 import toast from "react-hot-toast";
+import { useMediaQuery } from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -67,6 +69,18 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+const styleModile = {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  transform: "translate(0%, 0%)",
+  width: "100%",
+  height: 500,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+}
 
 // Debounce function
 function debounce(func, delay) {
@@ -88,6 +102,7 @@ const SearchWithModal = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const theme = useTheme();
+  const isMobile = useMediaQuery("(max-width:800px)");
 
 
 
@@ -157,7 +172,7 @@ const SearchWithModal = () => {
         aria-labelledby="search-modal-title"
         aria-describedby="search-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={isMobile ? styleModile : style}>
           <Search sx={{
             mb: 3,
 
