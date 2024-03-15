@@ -1,5 +1,4 @@
 "use client"
-
 import * as React from 'react'
 import Box from "@mui/material/Box";
 
@@ -11,9 +10,11 @@ import Typography from "@mui/material/Typography";
 import Button from '@mui/material/Button';
 
 import { PlayerList } from './Context/PlayerList';
+import { useMediaQuery } from '@mui/material';
 
 const HeroCardS = ({tracks}) => {
     const { addToLast, clearPlaylist } = React.useContext(PlayerList);
+    const isMobile = useMediaQuery('(max-width:750px)');
 
     const handlePlayAll = () => {
         clearPlaylist();
@@ -25,6 +26,7 @@ const HeroCardS = ({tracks}) => {
         <Box
           sx={{
             display: "flex",
+            flexDirection: isMobile ? "column" : "row",
             gap: "20px",
             marginBottom: "30px",
             alignItems: "center",

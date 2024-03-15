@@ -18,6 +18,7 @@ import { PlayerList } from "../Context/PlayerList";
 import LikeSongComponent from "./LikeSongComponent";
 import { FavouriteSongsContext } from "../Context/FavouriteSongsContext";
 import { AuthContext } from "../Context/AuthContex";
+import { useMediaQuery } from "@mui/material";
 
 const FavouriteTracks = () => {
   const { addToFront, clearPlaylist } = React.useContext(PlayerList);
@@ -25,6 +26,7 @@ const FavouriteTracks = () => {
   const { favoriteSongs } = React.useContext(FavouriteSongsContext);
 
   const [artistArray, setArtistArray] = React.useState([]);
+  const isMobile = useMediaQuery("(max-width:750px)");
 
   const handleAddToFront = (track) => {
     clearPlaylist();
@@ -89,7 +91,7 @@ const fetchArtists = async () => {
   
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table sx={{ Width: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Track</TableCell>
@@ -97,7 +99,7 @@ const fetchArtists = async () => {
             {authContext.isUserAuthenticated() && (
               <TableCell align="center">Like</TableCell>
             )}
-            <TableCell align="center">Duration</TableCell>
+            {!isMobile && <TableCell align="center">Duration</TableCell>}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -147,7 +149,7 @@ const fetchArtists = async () => {
                     <LikeSongComponent id={track._id} />
                   </TableCell>
                 )}
-                <TableCell align="center">no data</TableCell>
+               {!isMobile && <TableCell align="center">no data</TableCell>}
               </TableRow>
             );
           })}

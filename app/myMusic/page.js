@@ -27,10 +27,10 @@ const Page = () => {
   return (
     <>
       {authContext.isUserAuthenticated() ? (
-        <>
+        <Box>
           <UserHero name={authContext.authState.userInfo.name} />
           <FavouriteTracks/>
-        </>
+        </Box>
       ) : (
         <Box
           sx={{

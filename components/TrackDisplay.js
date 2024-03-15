@@ -11,11 +11,12 @@ import Paper from "@mui/material/Paper";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import { CardActionArea } from "@mui/material";
+import { Box, CardActionArea, Typography } from "@mui/material";
 
 import { PlayerList } from "./Context/PlayerList";
 import LikeSongComponent from "@/components/UserComponent/LikeSongComponent";
 import { AuthContext } from "./Context/AuthContex";
+import { useMediaQuery } from "@mui/material";
 
 const TrackDisplay = ({ tracks }) => {
   const { addToFront, clearPlaylist } = React.useContext(PlayerList);
@@ -25,10 +26,11 @@ const TrackDisplay = ({ tracks }) => {
   };
 
   const authContext = React.useContext(AuthContext);
+  const isMobile = useMediaQuery("(max-width:750px)");
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table sx={{ Width: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Track</TableCell>
@@ -36,7 +38,7 @@ const TrackDisplay = ({ tracks }) => {
             {authContext.isUserAuthenticated() && (
               <TableCell align="center">Like</TableCell>
             )}
-            <TableCell align="center">Duration</TableCell>
+            {!isMobile && <TableCell align="center">Duration</TableCell>}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -74,7 +76,7 @@ const TrackDisplay = ({ tracks }) => {
                   <LikeSongComponent id={track._id} />
                 </TableCell>
               )}
-              <TableCell align="center">no data</TableCell>
+              {!isMobile && <TableCell align="center">no data</TableCell>}
             </TableRow>
           ))}
         </TableBody>

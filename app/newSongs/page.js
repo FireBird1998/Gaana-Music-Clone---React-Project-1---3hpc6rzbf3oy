@@ -15,11 +15,13 @@ import Typography from "@mui/material/Typography";
 
 import Button from "@mui/material/Button";
 import { PlayerList } from "@/components/Context/PlayerList";
+import { useMediaQuery } from "@mui/material";
 
 const page = () => {
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
   const { addToLast, clearPlaylist } = useContext(PlayerList);
+  const isMobile = useMediaQuery("(max-width:750px)");
 
   const handlePlayAll = () => {
     clearPlaylist();
@@ -45,7 +47,7 @@ const page = () => {
 
   return (
     <>
-      {HeroCard(tracks, handlePlayAll, clearPlaylist)}
+      {HeroCard(tracks, handlePlayAll, clearPlaylist, isMobile)}
       <TrackDisplay tracks={tracks} />
     </>
   );
@@ -54,13 +56,14 @@ const page = () => {
 export default page;
 
 
-const HeroCard = (tracks, handlePlayAll, clearPlaylist) => {
+const HeroCard = (tracks, handlePlayAll, clearPlaylist, isMobile) => {
     // Check if tracks array is not empty
     if (tracks.length > 0) {
       return (
         <Box
           sx={{
             display: "flex",
+            flexDirection: isMobile ? "column" : "row",
             gap: "20px",
             marginBottom: "30px",
             alignItems: "center",

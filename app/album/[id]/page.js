@@ -15,12 +15,14 @@ import {
 
 import TrackDisplay2 from "@/components/TrackDisplay2";
 import { PlayerList } from "@/components/Context/PlayerList";
+import { useMediaQuery } from "@mui/material";
+import { Fleur_De_Leah } from "next/font/google";
 
 const page = () => {
   let { id } = useParams();
   const [album, setAlbum] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const isMobile = useMediaQuery("(max-width:750px)");
   const { addToLast, clearPlaylist } = useContext(PlayerList);
 
   const handlePlayAll = () => {
@@ -45,7 +47,7 @@ const page = () => {
 
   return (
     <>
-      {HeroCard(album, handlePlayAll, clearPlaylist)}
+      {HeroCard(album, handlePlayAll, clearPlaylist, isMobile)}
       <TrackDisplay2 tracks={album[0].songs} artistArray={album[0].artists} />
     </>
   );
@@ -53,13 +55,15 @@ const page = () => {
 
 export default page;
 
-const HeroCard = (almum, handlePlayAll, clearPlaylist) => {
+const HeroCard = (almum, handlePlayAll, clearPlaylist, isMobile) => {
+  
   // Check if tracks array is not empty
   if (almum.length > 0) {
     return (
       <Box
         sx={{
           display: "flex",
+          flexDirection: isMobile ? "column" : "row",
           gap: "20px",
           marginBottom: "30px",
           alignItems: "center",

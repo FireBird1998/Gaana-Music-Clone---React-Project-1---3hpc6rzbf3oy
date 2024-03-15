@@ -1,7 +1,9 @@
+"use client";
 import React from "react";
 import { Box, Avatar, Typography, Button, Modal } from "@mui/material";
 import UpdatePassword from "./UpdatePassword";
 import { useTheme } from "@mui/material/styles";
+import { useMediaQuery } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -21,12 +23,13 @@ const UserHero = ({ name }) => {
   const handleClose = () => setOpen(false);
   const theme = useTheme();
   const color = theme.palette.mode === 'dark' ? theme.palette.primary.main : 'black';
+  const isMobile = useMediaQuery('(max-width:750px)');
 
   return (
     <Box
       sx={{
         width: "100%",
-        height: "30vh",
+        height: "30%",
       }}
     >
       <Box
@@ -46,15 +49,10 @@ const UserHero = ({ name }) => {
         >
           {name[0].toUpperCase()}
         </Avatar>
-        <Box
-          sx={{
-            color: "#fff",
-            fontWeight: "600",
-            fontSize: "1.5rem",
-          }}
-        >
-          <Typography variant="h3" sx={{
+        <Box>
+          <Typography variant={"h3"} sx={{
             color: color,
+            fontSize: isMobile ? "1.5rem" : "2rem",
           }}>
             Hello! {name}. Welcome to your Page
           </Typography>
