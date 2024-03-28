@@ -8,12 +8,16 @@ import { CardActionArea } from "@mui/material";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import { useTheme } from "@mui/material/styles";
 import { PlayerList } from "./Context/PlayerList";
+import { useRouter } from "next/navigation";
 
-const SearchBarCard = ({ img, title, track }) => {
+const SearchBarCard = ({ img, title, track, closeModal }) => {
   const { addToFront, clearPlaylist } = useContext(PlayerList);
+  const router = useRouter();
   const handleAddToFront = () => {
     clearPlaylist();
     addToFront(track);
+    closeModal(); 
+    router.push(`/album/${track.album}`);
   };
 
   const theme = useTheme();

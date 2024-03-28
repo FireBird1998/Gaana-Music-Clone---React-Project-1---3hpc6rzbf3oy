@@ -80,7 +80,7 @@ const styleModile = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
-}
+};
 
 // Debounce function
 function debounce(func, delay) {
@@ -95,7 +95,6 @@ function debounce(func, delay) {
   };
 }
 
-
 const SearchWithModal = () => {
   const [open, setOpen] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
@@ -103,8 +102,6 @@ const SearchWithModal = () => {
   const [isLoading, setIsLoading] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery("(max-width:800px)");
-
-
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -124,33 +121,34 @@ const SearchWithModal = () => {
         .then((response) => {
           if (!response.ok) {
             if (response.status === 404) {
-              throw new Error('No Search Result');
+              throw new Error("No Search Result");
             } else {
-              throw new Error('Network response was not ok');
+              throw new Error("Network response was not ok");
             }
           }
           return response.json();
         })
         .then((data) => {
-          console.log(data.data);
+          
           setSearchResults(data.data);
         })
         .catch((error) => {
-          console.error('There has been a problem with your fetch operation:', error);
-          
+          console.error(
+            "There has been a problem with your fetch operation:",
+            error
+          );
         })
         .finally(() => {
           setIsLoading(false);
         });
     }
   }, 1000); // Adjust delay as needed
-  
+
   useEffect(() => {
     if (searchTerm) {
       debouncedSearch(searchTerm);
     }
   }, [searchTerm]);
-  
 
   return (
     <Box>
@@ -163,7 +161,6 @@ const SearchWithModal = () => {
           inputProps={{ "aria-label": "search" }}
           onClick={handleOpen}
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
         />
       </Search>
       <Modal
@@ -173,17 +170,17 @@ const SearchWithModal = () => {
         aria-describedby="search-modal-description"
       >
         <Box sx={isMobile ? styleModile : style}>
-          <Search sx={{
-            mb: 3,
-
-          }}>
+          <Search
+            sx={{
+              mb: 3,
+            }}
+          >
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search Artist, Songs, Albums"
               inputProps={{ "aria-label": "search" }}
-              onClick={handleOpen}
               value={searchTerm}
               autoFocus
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -191,13 +188,7 @@ const SearchWithModal = () => {
           </Search>
           <Box>
             {searchResults.length > 0 && (
-              <Swiper
-                spaceBetween={30}
-                slidesPerView={3}
-                onSlideChange={() => console.log("slide change")}
-                onSwiper={(swiper) => console.log(swiper)}
-                
-              >
+              <Swiper spaceBetween={30} slidesPerView={3}>
                 {searchResults.map((result) => (
                   <SwiperSlide key={result._id}>
                     <SearchBarCard
@@ -205,6 +196,7 @@ const SearchWithModal = () => {
                       img={result.thumbnail}
                       id={result._id}
                       track={result}
+                      closeModal={handleClose}
                     />
                   </SwiperSlide>
                 ))}
