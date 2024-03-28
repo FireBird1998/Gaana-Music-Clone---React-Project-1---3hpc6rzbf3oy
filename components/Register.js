@@ -18,10 +18,28 @@ const validateEmail = (email) => {
   return re.test(String(email).toLowerCase());
 }
 
-const validatePassword = (password) => {
-  // the password must contain at least one uppercase letter, one lowercase letter, and one number.
-  return password.length >= 8;
+const validatePassword = (password, email) => {
+  const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+  return re.test(String(password));
 }
+
+const validatePassword2 = (password, email) => {
+  const passLength = password.length;
+  const emailLength = email.length;
+  let commonSubstring = 0;
+  for(let i = 0 ; i < passLength; i++) {
+    for(let j = 0 ; j < emailLength; j++) {
+      if(password[i] == email[j]) {
+        commonSubstring++;
+      }
+    }
+  }
+  if(commonSubstring == passLength) {
+    return false;
+  }
+  return true;
+}
+
 
 /**
  * Register component for user registration
@@ -45,10 +63,16 @@ export default function Register({toggle}) {
       return;
     }
 
-    if (!validatePassword(password)) {
-      toast.error('Invalid password. It must be at least 8 characters long. Must have one Cap and One Small');
+    if (!validatePassword(password, email)) {
+      toast.error('Invalid password. It must be at least 8 characters long. Must have one Cap and One Small.');
       return;
     }
+
+
+    // if (!validatePassword2(password, email)) {
+    //   toast.error('there is a common substring in both email and Pass');
+    //   return;
+    // }
 
     console.log({
       name: data.get('username'),
