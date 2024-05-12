@@ -18,10 +18,10 @@ const AuthProvider = ({ children }) => {
 
   const setUserAuthInfo = ({ token, data }) => {
     localStorage.setItem("token", token);
-    localStorage.setItem("userInfo", JSON.stringify(data));
+    localStorage.setItem("userInfo", JSON.stringify(data.user));
     setAuthState({
       token: token,
-      userInfo: data,
+      userInfo: data.user,
     });
     setIsAuthenticated(true);
   };
